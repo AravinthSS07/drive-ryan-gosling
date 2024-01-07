@@ -3,6 +3,8 @@ import './style.css'
 import * as THREE from "three";
 
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import {FlyControls} from "three/examples/jsm/controls/FlyControls";
+
 
 const scene = new THREE.Scene();
 
@@ -27,6 +29,12 @@ const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 
 const controls = new OrbitControls(camera, renderer.domElement);
+const controller = new FlyControls(camera, renderer.domElement);
+controller.movementSpeed = 100;
+controller.rollSpeed = Math.PI/24;
+controller.autoForward = false;
+controller.dragToLook = true;
+
 
 function addStar(){
   const geometry = new THREE.SphereGeometry(0.25,24,24);
@@ -54,6 +62,7 @@ function animate(){
   cube.rotation.y += 0.007;
 
   controls.update();
+  controller.update(0.01);
 
   renderer.render(scene, camera);
 }
