@@ -47,7 +47,7 @@ function addStar(){
   scene.add(star);
 }
 
-Array(200).fill().forEach(addStar);
+Array(500).fill().forEach(addStar);
 
 function moveCamera(){
   const t = document.body.getBoundingClientRect().top;
