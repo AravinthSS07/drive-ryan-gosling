@@ -56,8 +56,19 @@ function moveCamera(){
 
 document.body.onscroll = moveCamera
 
-//const audio = new Audio("nightcall.mp3")
+//const audio = new Audio("nightcall.mp3");
+//audio.load();
 //audio.play();
+
+function playAudio(){
+  const audio = new Audio("nightcall.mp3");
+  audio.load();
+  audio.play();
+}
+
+window.onload = function(){
+  playAudio();
+}
 
 function animate(){
   requestAnimationFrame(animate);
