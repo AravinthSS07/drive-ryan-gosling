@@ -21,11 +21,14 @@ camera.position.z = 30;
 const driveRyan = new THREE.TextureLoader().load("drive.png");
 const cube = new THREE.Mesh(
   new THREE.BoxGeometry(10,10,10),
-  new THREE.MeshBasicMaterial({map:driveRyan})
+  new THREE.MeshStandardMaterial({map:driveRyan})
 );
 scene.add(cube);
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+const skybox = new THREE.TextureLoader().load("skybox.jpg");
+scene.background = skybox;
+
+const ambientLight = new THREE.AmbientLight(0xffffff,2);
 scene.add(ambientLight);
 
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -34,7 +37,10 @@ controller.movementSpeed = 100;
 controller.rollSpeed = Math.PI/24;
 controller.autoForward = false;
 controller.dragToLook = true;
-
+controls.minDistance = 15;
+controls.maxDistance = 60;
+controls.enableDamping = true;
+controls.dampingFactor = 1;
 
 function addStar(){
   const geometry = new THREE.SphereGeometry(0.25,24,24);
@@ -47,7 +53,7 @@ function addStar(){
   scene.add(star);
 }
 
-Array(500).fill().forEach(addStar);
+const stars = Array(500).fill().forEach(addStar);
 
 function moveCamera(){
   const t = document.body.getBoundingClientRect().top;
@@ -56,10 +62,20 @@ function moveCamera(){
 
 document.body.onscroll = moveCamera
 
+let clock = new THREE.Clock();
+
 function animate(){
   requestAnimationFrame(animate);
 
   cube.rotation.y += 0.007;
+  cube.rotation.z += 0.007;
+  cube.rotation.x += 0.007;
+
+  const time = clock.getElapsedTime();
+
+  camera.position.y = Math.cos(time)*2;
+  camera.position.x = Math.sin(time)*2;
+  camera.position.z = Math.tanh(time)*2;
 
   controls.update();
   controller.update(0.01);
