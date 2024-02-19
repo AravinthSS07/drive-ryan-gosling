@@ -25,8 +25,12 @@ const cube = new THREE.Mesh(
 );
 scene.add(cube);
 
+const tourus = new THREE.Mesh(
+  new THREE.
+)
+
 const skybox = new THREE.TextureLoader().load("skybox.jpg");
-scene.background = skybox;
+//scene.background = skybox;
 
 const ambientLight = new THREE.AmbientLight(0xffffff,2);
 scene.add(ambientLight);
@@ -73,9 +77,11 @@ function animate(){
 
   const time = clock.getElapsedTime();
 
-  camera.position.y = Math.cos(time)*2;
   camera.position.x = Math.sin(time)*2;
+  /*
+  camera.position.y = Math.cos(time)*2;
   camera.position.z = Math.tanh(time)*2;
+  */
 
   controls.update();
   controller.update(0.01);
