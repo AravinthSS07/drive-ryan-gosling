@@ -25,10 +25,6 @@ const cube = new THREE.Mesh(
 );
 scene.add(cube);
 
-const tourus = new THREE.Mesh(
-  new THREE.
-)
-
 const skybox = new THREE.TextureLoader().load("skybox.jpg");
 //scene.background = skybox;
 
