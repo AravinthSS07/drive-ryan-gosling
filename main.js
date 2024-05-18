@@ -26,7 +26,7 @@ const cube = new THREE.Mesh(
 scene.add(cube);
 
 const skybox = new THREE.TextureLoader().load("skybox.jpg");
-//scene.background = skybox;
+scene.background = skybox;
 
 const ambientLight = new THREE.AmbientLight(0xffffff,2);
 scene.add(ambientLight);
